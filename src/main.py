@@ -58,7 +58,6 @@ def process_data(df):
     # return splits and encoder
     return X_train, X_test, y_train, y_test, enc
 
-
 def train_model(params, num_boost_round, X_train, X_test, y_train, y_test):
     # create lightgbm datasets
     train_data = lgbm.Dataset(X_train, label=y_train)

@@ -121,7 +121,7 @@ class TestAzureMLWorkspace(unittest.TestCase):
         )
         
         registered_model = self.ml_client.models.create_or_update(model)
-        
+
         self.assertIsNotNone(registered_model)
 
 
@@ -167,6 +167,21 @@ class TestAzureMLWorkspace(unittest.TestCase):
 
         # TODO: check for success in deployment creation
 
+    def test_default_datastores_there(self):
+
+        system_ds = self.ml_client.datastores.list()
+
+        ds_names = [ds.name for ds in system_ds]
+        
+        self.assertIn("workspaceblobstore", ds_names)
+        self.assertIn("workspaceartifactstore", ds_names)
+        self.assertIn("workspaceworkingdirectory", ds_names)
+        self.assertIn("workspacefilestore", ds_names)
+
+    def test_default_connections_there(self):
+        # just for AI studio
+        # TODO
+        return
 
     # def test_submit_pipeline_job(self):
     #     pipeline_job = self.ml_client.jobs.create_or_update({
